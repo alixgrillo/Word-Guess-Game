@@ -17,14 +17,41 @@ var boxer = {
     image: "tbd",
     song: "tbd",
 }
+var bulldog = {
+    word: "bulldog",
+    image: "tbd",
+    song: "tbd",
+}
+var chihuahua = {
+    word: "chihuahua",
+    image: "tbd",
+    song: "tbd",
+}
+var germanShepard = {
+    word: "german shepard",
+    image: "tbd",
+    song: "tbd",
+}
 
-var words = [greyhound, boxer];
+var words = [greyhound, boxer, bulldog, chihuahua, germanShepard];
+
 
 // pick a word
 var newWord = words[Math.floor(Math.random() * words.length)].word;
 var wordText = "";
 for (var i = 0; i < newWord.length; i++) {
-    wordText = wordText + "_"+i+" ";
+    console.log(newWord.charAt(i));
+    console.log(wordText);
+    if(newWord.charAt(i)===" "){
+        console.log("hit space");
+        wordText = wordText +" "+" "+" "+" "+" ";
+    } else{
+        wordText = wordText + "_"+i+" "+" "+" ";
+    }
+
+    // var para = document.createElement("P");                 // Create a <p> element
+    // para.innerHTML = "___ ";                // Insert text
+    // document.getElementById("myDIV").appendChild(para);     // Append <p> to <div> with id="myDIV"
 }
 
 function loadPage() {
@@ -40,7 +67,9 @@ function loadPage() {
     userLosses.textContent = "Losses: " + numLosses;
     userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
     userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
+    console.log(wordText);
     word.textContent = wordText;
+    console.log(word.textContent);
 }
 
 
@@ -60,7 +89,7 @@ document.onkeyup = function(event) {
     // add letter chosen to the letters guessed list
     lettersGuessed.push(userGuess);
 
-
+    var letterExists = false;
     // determine if letter exists in the word
     for (var i = 0; i < newWord.length; i++) {
        // console.log(newWord.charAt(i)===userGuess);
@@ -68,16 +97,25 @@ document.onkeyup = function(event) {
         //bconsole.log(userGuess);
         if(newWord.charAt(i)===userGuess){
             console.log("if run");
-            wordText.replace("0", userGuess);
+            wordText = wordText.replace(i, userGuess.toUpperCase());
             console.log(wordText);
             word.textContent = wordText;
+            letterExists = true;
         }
+    }
+    if(letterExists == false){
+        guessLeft = guessLeft-1;
+    }
+
+    if(guessLeft === 0){
+        numLosses++;
+        alert("Sorry! You didn't guess the word. Better luck next time.")
     }
 
     // at some point,g add 1 to Numwins
     numWins++;
     // at some point, add 1 to numlosses
-    numLosses++;
+    
 
     userWins.textContent = "Wins: " + numWins;
     userLosses.textContent = "Losses: " + numLosses;
