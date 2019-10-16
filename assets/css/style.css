@@ -1,3 +1,28 @@
-/* #word{
-    text-decoration: underline;
-} */
+.jumbotron{
+    background-image: url(../images/bones.jpg);
+}
+body{
+    /* background-image: url(../images/background.jpg); */
+}
+
+.headerContainer{
+    width: 60%;
+    color: black;
+    font-weight: 900;
+    background-color: #F6F6F6;
+    margin-left: 200px;
+    font-family: 'Luckiest Guy', cursive;
+}
+.container{
+    background-color: #F6F6F6;
+}
+#word{
+    font-size: 28px;
+    font-family: 'Roboto', sans-serif;
+}
+p{
+    font-family: 'Raleway', sans-serif;
+}
+#scores{
+    padding-top: 3%;
+}

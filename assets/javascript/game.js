@@ -57,6 +57,12 @@ function pickWord(){
     return newWord;
 }
 
+function pickNewWord(){
+    word.textContent = "";
+    return pickWord();
+}
+
+
 // run this when the page loads - this will load the initial text
 function loadPage() {
     
@@ -137,28 +143,28 @@ document.onkeyup = function(event) {
             if(guessLeft === 0){
                 numLosses++;
                 alert("Sorry! You didn't guess the word. Better luck next time.")
-                pickWord();
 
             // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
                 // at some point,g add 1 to Numwins
-                document.getElementById("image").innerHTML = '<img src=' + newWordP + ' />';
+                document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
                 alert("Congrats! You picked the right word!");
-                pickWord();
+
             }
 
-        
-            
-
-            
+     
             // 
             userWins.textContent = "Wins: " + numWins;
             userLosses.textContent = "Losses: " + numLosses;
             userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
             userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
         }
+    } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
+        newWordG = pickNewWord();
+        newWord = newWordG.word;
+        newWordP = newWordG.image;
     }
 }
 
-// items to complete: image shows up after; reload word; styling,
+// items to complete: reload word; styling,
