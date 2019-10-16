@@ -58,8 +58,26 @@ function pickWord(){
 }
 
 function pickNewWord(){
-    word.textContent = "";
-    return pickWord();
+    // re-initialize js element ids
+    var userGuessesLeft = document.getElementById("numGuesses");
+    var userGuesses = document.getElementById("guessedLetters");
+    var word = document.getElementById("word");
+    
+    // reset values for a new sub-game
+    document.getElementById("result").textContent = "";
+    wordText = "";
+    guessLeft = 10;
+    lettersGuessed = [];
+
+    // reset values on the page based on new value, including removing image
+    userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
+    userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
+    document.getElementById("image").innerHTML = '';
+    
+    // run the logic to "pick" a new word and set it up on the page
+    var startNewWord = pickWord();
+    word.textContent = wordText;
+    return startNewWord;
 }
 
 
@@ -142,28 +160,29 @@ document.onkeyup = function(event) {
             // if there are not any guesses left, add a loss and alert the user that they didn't guess correctly
             if(guessLeft === 0){
                 numLosses++;
-                alert("Sorry! You didn't guess the word. Better luck next time.")
+                document.getElementById("result").innerHTML = "<p>There are no more guesses available and you didn't pick the correct word. Please hit the space bar to start a new game.";
 
             // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
                 // at some point,g add 1 to Numwins
                 document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
-                alert("Congrats! You picked the right word!");
-
+                document.getElementById("result").innerHTML = "<p>Congrats! You picked the right word! Please hit the space bar to start a new game.";
             }
 
      
-            // 
+            // update the counters
             userWins.textContent = "Wins: " + numWins;
             userLosses.textContent = "Losses: " + numLosses;
             userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
             userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
         }
+        // when the game is "over", the user needs to hit the space bar in order to start a new game
     } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
         newWordG = pickNewWord();
         newWord = newWordG.word;
         newWordP = newWordG.image;
+
     }
 }
 

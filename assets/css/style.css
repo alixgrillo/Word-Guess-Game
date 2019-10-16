@@ -1,8 +1,10 @@
 .jumbotron{
     background-image: url(../images/bones.jpg);
+    padding-bottom: 2%;
 }
 body{
-    /* background-image: url(../images/background.jpg); */
+    
+    background-image: url(../images/cork-board.png);
 }
 
 .headerContainer{
@@ -12,9 +14,14 @@ body{
     background-color: #F6F6F6;
     margin-left: 200px;
     font-family: 'Luckiest Guy', cursive;
+    padding-bottom: 0%;
 }
 .container{
+    border-radius: 25px;
     background-color: #F6F6F6;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
 }
 #word{
     font-size: 28px;
