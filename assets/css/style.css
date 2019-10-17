@@ -33,3 +33,18 @@ p{
 #scores{
     padding-top: 3%;
 }
+.winText{
+    color: green;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+.lossText{
+    color: red;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+img{
+    border-radius: 10px;
+}

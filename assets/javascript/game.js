@@ -70,6 +70,8 @@ function pickNewWord(){
     lettersGuessed = [];
 
     // reset values on the page based on new value, including removing image
+    correctLetters = 0;
+    numLetters = 0;
     userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
     userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
     document.getElementById("image").innerHTML = '';
@@ -119,7 +121,7 @@ document.onkeyup = function(event) {
     if(userGuessCode > 64 && userGuessCode < 91){
 
         for(var j=0; j<lettersGuessed.length; j++){
-            if(userGuess === lettersGuessed[j]){
+            if(userGuess.toUpperCase() === lettersGuessed[j]){
                 guessDuplicate=true;
             }
         }
@@ -127,7 +129,7 @@ document.onkeyup = function(event) {
         if(guessDuplicate===false){
 
             // add letter chosen to the letters guessed list
-            lettersGuessed.push(userGuess);
+            lettersGuessed.push(userGuess.toUpperCase());
         
            // user boolean to determine if the letter exists to give user credit for picking the correct value
             var letterExists = false;
@@ -146,7 +148,7 @@ document.onkeyup = function(event) {
                     correctLetters++;
                 } else{
                     // concatenate wordText with previously saved sections
-                    updatedWordText = updatedWordText + wordText.substring(i*6,i*6+6);
+                    updatedWordText += wordText.substring(i*6,i*6+6);
                 }
             }
             wordText = updatedWordText;
@@ -157,17 +159,20 @@ document.onkeyup = function(event) {
             if(letterExists == false){
                 guessLeft = guessLeft-1;
             }
+            console.log("correctLetters" + correctLetters + " number of letters " + numLetters);
             // if there are not any guesses left, add a loss and alert the user that they didn't guess correctly
             if(guessLeft === 0){
                 numLosses++;
                 document.getElementById("result").innerHTML = "<p>There are no more guesses available and you didn't pick the correct word. Please hit the space bar to start a new game.";
-
-            // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
+                document.getElementById("result").className = "lossText";
+                console.log("Guesses left: " +userGuessesLeft + " userguesses" + lettersGuessed + " letter exists" + letterExists);
+                // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
                 // at some point,g add 1 to Numwins
                 document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
                 document.getElementById("result").innerHTML = "<p>Congrats! You picked the right word! Please hit the space bar to start a new game.";
+                document.getElementById("result").className = "winText";
             }
 
      
@@ -180,10 +185,9 @@ document.onkeyup = function(event) {
         // when the game is "over", the user needs to hit the space bar in order to start a new game
     } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
         newWordG = pickNewWord();
+        console.log("Guesses left: " +userGuessesLeft + " userguesses" + lettersGuessed + " letter exists" + letterExists);
         newWord = newWordG.word;
         newWordP = newWordG.image;
 
     }
 }
-
-// items to complete: reload word; styling,
