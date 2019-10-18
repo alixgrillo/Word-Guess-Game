@@ -1,6 +1,7 @@
 # Word-Guess-Game
 Hangman Challenge
 
+The inspiration of the theme of this project is my awesome dog, Albert.
 
 <img src="/assets/images/cover-photo.jpg" width = 400px>
 
