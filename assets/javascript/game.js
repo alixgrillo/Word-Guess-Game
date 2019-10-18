@@ -6,27 +6,27 @@ var lettersGuessed = [];
 var greyhound = {
     word: "greyhound",
     image: "assets/images/greyhound.jpg",
-    song: "tbd",
+    song: "assets/sounds/labrador-barking-daniel_simon.mp3",
 }
 var boxer = {
     word: "boxer",
     image: "assets/images/boxer.jpg",
-    song: "tbd",
+    song: "assets/sounds/Puppy Dog Barking-SoundBible.com-871302192.mp3",
 }
 var bulldog = {
     word: "bulldog",
     image: "assets/images/bulldog.jpg",
-    song: "tbd",
+    song: "assets/sounds/Dog Woof-SoundBible.com-457935112.mp3",
 }
 var chihuahua = {
     word: "chihuahua",
     image: "assets/images/chihuahua.webp",
-    song: "tbd",
+    song: "assets/sounds/small-dog-barking_daniel-simion.mp3",
 }
 var germanShepard = {
     word: "german shepard",
     image: "assets/images/german_shephard.jpg",
-    song: "tbd",
+    song: "assets/sounds/german-shephard-daniel_simon.mp3",
 }
 
 var words = [greyhound, boxer, bulldog, chihuahua, germanShepard];
@@ -37,6 +37,7 @@ var wordText = "";
 var newWordG = pickWord();
 var newWord = newWordG.word;
 var newWordP = newWordG.image;
+var newWordS = newWordG.song;
 
 
 function pickWord(){
@@ -173,6 +174,7 @@ document.onkeyup = function(event) {
                 document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
                 document.getElementById("result").innerHTML = "<p>Congrats! You picked the right word! Please hit the space bar to start a new game.";
                 document.getElementById("result").className = "winText";
+                playSound();
             }
 
      
@@ -185,9 +187,17 @@ document.onkeyup = function(event) {
         // when the game is "over", the user needs to hit the space bar in order to start a new game
     } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
         newWordG = pickNewWord();
-        console.log("Guesses left: " +userGuessesLeft + " userguesses" + lettersGuessed + " letter exists" + letterExists);
         newWord = newWordG.word;
         newWordP = newWordG.image;
+        newWordS = newWordG.song;
 
     }
+    function playSound() {
+        console.log("playing sound");
+        const sound = new Audio()
+        sound.src = newWordS;
+        sound.play();
+    }
+
+
 }
