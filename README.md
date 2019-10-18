@@ -55,5 +55,5 @@ There are no requirements for this game.
 * https://www.toptal.com/designers/subtlepatterns/
 
 ## License
-This project was created by [John Garrett](https://github.com/alixgrillo).    
+This project was created by [Alix Grillo](https://github.com/alixgrillo).    
 [License](https://github.com/alixgrillo/Word-Guess/Game/LICENSE.md) 
