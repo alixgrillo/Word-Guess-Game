@@ -28,8 +28,23 @@ var germanShepard = {
     image: "assets/images/german_shephard.jpg",
     song: "assets/sounds/german-shephard-daniel_simon.mp3",
 }
+var labradoodle = {
+    word: "labradoodle",
+    image: "assets/images/labradoodle.jpg",
+    song: "assets/sounds/labrador-barking-daniel_simon.mp3",
+}
+var pomeranian = {
+    word: "pomeranian",
+    image: "assets/images/pomeranian.jpg",
+    song: "assets/sounds/small-dog-barking_daniel-simion.mp3",
+}
+var newfoundland = {
+    word: "newfoundland",
+    image: "assets/images/newfoundland.jpg",
+    song: "assets/sounds/Dog Barking-SoundBible.com-1918920417.mp3",
+}
 
-var words = [greyhound, boxer, bulldog, chihuahua, germanShepard];
+var words = [greyhound, boxer, bulldog, chihuahua, germanShepard, labradoodle, pomeranian, newfoundland];
 
 var numLetters = 0;
 var correctLetters = 0;
@@ -127,6 +142,7 @@ document.onkeyup = function(event) {
             }
         }
         
+        // only continue if the letter hasn't been guessed yet
         if(guessDuplicate===false){
 
             // add letter chosen to the letters guessed list
@@ -170,7 +186,7 @@ document.onkeyup = function(event) {
                 // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
-                // at some point,g add 1 to Numwins
+                // update image, play sound, and let the user know that they won
                 document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
                 document.getElementById("result").innerHTML = "<p>Congrats! You picked the right word! Please hit the space bar to start a new game.";
                 document.getElementById("result").className = "winText";
@@ -186,12 +202,18 @@ document.onkeyup = function(event) {
         }
         // when the game is "over", the user needs to hit the space bar in order to start a new game
     } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
-        newWordG = pickNewWord();
+        var newWordTmp = newWordG;
+        // do while loop keeps the same word from coming up twice in a row
+        do{
+            newWordG = pickNewWord();
+        }
+        while(newWordG === newWordTmp)        
         newWord = newWordG.word;
         newWordP = newWordG.image;
         newWordS = newWordG.song;
 
     }
+    //function that will play the associated sound when the word is picked correctly
     function playSound() {
         console.log("playing sound");
         const sound = new Audio()
