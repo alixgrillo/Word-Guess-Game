@@ -2,6 +2,7 @@ var numWins = 0;
 var numLosses = 0;
 var guessLeft = 10;
 var lettersGuessed = [];
+var letterGuessDisplay = "";
 
 var greyhound = {
     word: "greyhound",
@@ -84,12 +85,13 @@ function pickNewWord(){
     wordText = "";
     guessLeft = 10;
     lettersGuessed = [];
+    letterGuessDisplay = "";
 
     // reset values on the page based on new value, including removing image
     correctLetters = 0;
     numLetters = 0;
     userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
-    userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
+    userGuesses.textContent = "Letters Guessed: " + letterGuessDisplay;
     document.getElementById("image").innerHTML = '';
     
     // run the logic to "pick" a new word and set it up on the page
@@ -113,7 +115,7 @@ function loadPage() {
     userWins.textContent = "Wins: " + numWins;
     userLosses.textContent = "Losses: " + numLosses;
     userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
-    userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
+    userGuesses.textContent = "Letters Guessed: " + letterGuessDisplay;
     word.textContent = wordText;
 
 }
@@ -147,6 +149,7 @@ document.onkeyup = function(event) {
 
             // add letter chosen to the letters guessed list
             lettersGuessed.push(userGuess.toUpperCase());
+            letterGuessDisplay += userGuess.toUpperCase() + '\xa0';
         
            // user boolean to determine if the letter exists to give user credit for picking the correct value
             var letterExists = false;
@@ -182,7 +185,7 @@ document.onkeyup = function(event) {
                 numLosses++;
                 document.getElementById("result").innerHTML = "<p>There are no more guesses available and you didn't pick the correct word. Please hit the space bar to start a new game.";
                 document.getElementById("result").className = "lossText";
-                console.log("Guesses left: " +userGuessesLeft + " userguesses" + lettersGuessed + " letter exists" + letterExists);
+    
                 // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
@@ -198,7 +201,7 @@ document.onkeyup = function(event) {
             userWins.textContent = "Wins: " + numWins;
             userLosses.textContent = "Losses: " + numLosses;
             userGuessesLeft.textContent = "Guesses Remaining: " + guessLeft;
-            userGuesses.textContent = "Letters Guessed: " + lettersGuessed;
+            userGuesses.textContent = "Letters Guessed: " + letterGuessDisplay;
         }
         // when the game is "over", the user needs to hit the space bar in order to start a new game
     } else if (userGuessCode === 32 && (correctLetters===numLetters || guessLeft ===0)){
