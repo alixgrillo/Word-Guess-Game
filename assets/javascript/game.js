@@ -3,6 +3,7 @@ var numLosses = 0;
 var guessLeft = 10;
 var lettersGuessed = [];
 var letterGuessDisplay = "";
+var gameWon = false;
 
 var greyhound = {
     word: "greyhound",
@@ -143,9 +144,9 @@ document.onkeyup = function(event) {
                 guessDuplicate=true;
             }
         }
-        
+
         // only continue if the letter hasn't been guessed yet
-        if(guessDuplicate===false){
+        if(guessDuplicate===false && guessLeft>0 && gameWon === false){
 
             // add letter chosen to the letters guessed list
             lettersGuessed.push(userGuess.toUpperCase());
@@ -189,6 +190,7 @@ document.onkeyup = function(event) {
                 // if they guessed all of the correct letters, add a win and alert the user that they guessed correctly
             } else if(correctLetters===numLetters){
                 numWins++;
+                gameWon = true;
                 // update image, play sound, and let the user know that they won
                 document.getElementById("image").innerHTML = '<img src=' + newWordP + ' width= 400px />';
                 document.getElementById("result").innerHTML = "<p>Congrats! You picked the right word! Please hit the space bar to start a new game.";
@@ -214,6 +216,7 @@ document.onkeyup = function(event) {
         newWord = newWordG.word;
         newWordP = newWordG.image;
         newWordS = newWordG.song;
+        gameWon = false;
 
     }
     //function that will play the associated sound when the word is picked correctly
